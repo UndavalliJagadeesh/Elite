@@ -1,0 +1,17 @@
+class Solution {
+    private int res=0;
+    public void kthSmallest(TreeNode root, int[] count){
+        if(root==null) return;
+        kthSmallest(root.left, count);
+        count[0]--;
+        if(count[0]==0){
+            res=root.val;
+            return;
+        }
+        kthSmallest(root.right, count);
+    }
+    public int kthSmallest(TreeNode root, int k) {
+        kthSmallest(root, new int[] {k});
+        return res;
+    }
+}

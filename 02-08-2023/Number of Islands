@@ -1,0 +1,59 @@
+class Pair{
+    int row;
+    int col;
+    Pair(int row, int col){
+        this.row=row;
+        this.col=col;
+    }
+}
+
+class Solution {
+    boolean[][] visited;
+    int res=0;
+    char[][] grid;
+    // int[] drow={-1,-1,0,1,1,1,0,-1};
+    // int[] dcol={0,1,1,1,0,-1,-1,-1};
+    int[] drow={-1,0,1,0};
+    int[] dcol = {0,1,0,-1};
+    int n,m;
+    Queue<Pair> q = new LinkedList<>();
+    public int numIslands(char[][] grid) {
+        int count=0;
+        this.grid=grid;
+        n=grid.length;
+        m=grid[0].length;
+        visited = new boolean[n][m];
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                if(grid[i][j]=='1'){
+                    count++;
+                    grid[i][j]='0';
+                    BFS(i, j);
+                }
+            } 
+        }
+        return count;
+    }
+
+    public void BFS(int i, int j){
+        q.offer(new Pair(i,j));
+        while(!q.isEmpty()){
+            Pair tmp = q.remove();
+            int r = tmp.row;
+            int c = tmp.col;
+            for(int k=0; k<4; k++){
+                int rw = r+drow[k];
+                int cl = c+dcol[k];
+            // for(int dr=-1; dr<2; dr++){
+            //     for(int dc=-1; dc<2; dc++){
+            //         int rw = r+dr;
+            //         int cl = c+dc;
+                    if(rw>=0 && cl>=0 && rw<n && cl<m && grid[rw][cl]=='1'){
+                        grid[rw][cl]='0';
+                        q.offer(new Pair(rw, cl));
+                    // }
+                }
+            }
+        }
+    }
+}

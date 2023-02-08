@@ -1,0 +1,17 @@
+class Solution {
+    int diff=99999;
+    int prev=99999;
+    public int minDiffInBST(TreeNode root) {
+        inorder(root);
+        return diff;
+    }
+    public void inorder(TreeNode root){
+        if(root==null){
+            return;
+        }
+        if(root.left!=null) inorder(root.left);
+        if(Math.abs(prev-root.val)<diff) diff=Math.abs(prev-root.val);
+        prev=root.val;
+        if(root.right!=null) inorder(root.right);
+    }
+}

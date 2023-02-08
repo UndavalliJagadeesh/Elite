@@ -1,0 +1,20 @@
+class Solution {
+    int diff=99999;
+    int prev=99999;
+    public int getMinimumDifference(TreeNode root) {
+        // prev=root.val;
+        inorder(root);
+        return diff;
+    }
+    public void inorder(TreeNode root){
+        if(root==null){
+            return;
+        }
+        if(root.left!=null) inorder(root.left);
+        System.out.println(prev);
+        if(Math.abs(prev-root.val)<diff) diff=Math.abs(prev-root.val);
+        System.out.println(root.val-prev);
+        prev=root.val;
+        if(root.right!=null) inorder(root.right);
+    }
+}

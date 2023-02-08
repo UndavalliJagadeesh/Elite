@@ -1,0 +1,18 @@
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        TreeNode cur = root;
+        ArrayList<Integer> lst = new ArrayList<>();
+        Stack<TreeNode> s = new Stack<>();
+        while(cur!=null || s.size()>0){
+            while(cur!=null){
+                s.push(cur);
+                lst.add(cur.val);
+                cur=cur.left;
+            }
+            cur=s.pop();
+            cur=cur.right;
+        }
+        return lst;
+        
+    }
+}

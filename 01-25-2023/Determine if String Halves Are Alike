@@ -1,0 +1,17 @@
+class Solution {
+    public int counter(String s){
+        int count = s.replaceAll("[^aeiouAEIOU]", "").length();
+        return count;
+    }
+    public boolean halvesAreAlike(String s) {
+        if(s.length()%2!=0){
+            return false;
+        }
+        String a=s.substring(0,s.length()/2);
+        String b=s.substring(s.length()/2, s.length());
+        if(counter(a)==counter(b)){
+            return true;
+        }
+        return false;
+    }
+}

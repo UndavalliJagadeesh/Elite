@@ -1,0 +1,31 @@
+class Solution {
+    ArrayList<ArrayList<Integer>> adj= new ArrayList<>();
+    boolean[] visited;
+    ArrayList<Integer> res = new ArrayList<>();
+    Queue<Integer> q = new LinkedList<>();
+    public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        this.adj=adj;
+        visited = new boolean[V];
+        res.add(0);
+        bfs(0);
+        return res;
+    }
+    
+    public void bfs(int src){
+        q.offer(src);
+        visited[src]=true;
+        while(!q.isEmpty()){
+            int siz = q.size();
+            for(int i=0; i<siz; i++){
+                int tmp = q.remove();
+                for(int n: adj.get(tmp)){
+                    if(!visited[n]){
+                        visited[n]=true;
+                        res.add(n);
+                        q.offer(n);
+                    }
+                }
+            }
+        }
+    }
+}

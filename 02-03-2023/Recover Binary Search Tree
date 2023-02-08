@@ -1,0 +1,38 @@
+class Solution {
+    TreeNode first, pair, last, prev;
+    public void recoverTree(TreeNode root) {
+        first=pair=last=null;
+        prev=new TreeNode(Integer.MIN_VALUE);
+        inorder(root);
+        correct(root);
+    }
+
+    public void inorder(TreeNode root){
+        if(root==null){
+            return;
+        }
+        inorder(root.left);
+        if(root.val<prev.val){
+            if(first==null){
+                first=prev;
+                pair=root;
+            }else{
+                last=root;
+            }
+        }
+        prev=root;
+        inorder(root.right);
+    }
+    public void correct(TreeNode root){
+        if(first!=null && last!=null){
+            int val = first.val;
+            first.val = last.val;
+            last.val = val;
+        }
+        else if(pair!=null){
+            int val = first.val;
+            first.val = pair.val;
+            pair.val = val;
+        }
+    }
+}

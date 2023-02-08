@@ -1,0 +1,20 @@
+class Solution {
+    int sum=0;
+    int l=0;
+    int h=0;
+    public int rangeSumBST(TreeNode root, int low, int high) {
+        l=low;
+        h=high;
+        inorder(root);
+        return sum;
+    }
+    public void inorder(TreeNode root){
+        if(root==null){
+            return;
+        }
+        if(root.left!=null) inorder(root.left);
+        int val=root.val;
+        if(val>=l && val<=h) sum+=val;
+        if(root.right!=null) inorder(root.right);
+    }
+}

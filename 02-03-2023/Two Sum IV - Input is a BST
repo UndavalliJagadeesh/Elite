@@ -1,0 +1,42 @@
+class BSTIterator{
+    private Stack<TreeNode> s = new Stack<>();
+    boolean preVal=true;
+    BSTIterator(TreeNode root, boolean preVal){
+        this.preVal=preVal;
+        pushall(root);
+    }
+
+    public void pushall(TreeNode root){
+        while(root!=null){
+            s.push(root);
+            if(preVal) root=root.right;
+            else root=root.left;
+        }
+    }
+    
+    public int next(){
+        TreeNode tmp = s.pop();
+        if(preVal) pushall(tmp.left);
+        else pushall(tmp.right);
+        return tmp.val;
+    }
+
+    public boolean hasNext(){
+        return !s.isEmpty();
+    }
+}
+class Solution {
+    public boolean findTarget(TreeNode root, int k) {
+        if(root==null) return false;
+        BSTIterator low = new BSTIterator(root, false);
+        BSTIterator high= new BSTIterator(root, true);
+        int i=low.next();
+        int j=high.next();
+        while(i<j){
+            if(i+j==k) return true;
+            if(i+j<k) i=low.next();
+            else j=high.next();
+        }
+        return false;
+    }
+}

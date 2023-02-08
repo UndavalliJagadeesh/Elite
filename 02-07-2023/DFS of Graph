@@ -1,0 +1,20 @@
+class Solution {
+    ArrayList<ArrayList<Integer>> adj= new ArrayList<>();
+    boolean[] visited;
+    ArrayList<Integer> res = new ArrayList<>();
+    public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        this.adj=adj;
+        visited= new boolean[V];
+        dfs(0);
+        return res;
+    }
+    public void dfs(int src){
+        visited[src]=true;
+        res.add(src);
+        for(int i: adj.get(src)){
+            if(!visited[i]){
+                dfs(i);
+            }
+        }
+    }
+}

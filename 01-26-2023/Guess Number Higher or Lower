@@ -1,0 +1,19 @@
+public class Solution extends GuessGame {
+    public int guessNumber(int n) {
+        int l=0;
+        int h=n;
+        while(l<=h){
+            int val=l+((h-l)/2);
+            int res=guess(val);
+            if(res==0){
+                return val;
+            }
+            if(res==-1){
+                h=val-1;
+            }else{
+                l=val+1;
+            }
+        }
+        return -1;
+    }
+}

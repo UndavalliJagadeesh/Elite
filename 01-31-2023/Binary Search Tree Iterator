@@ -1,0 +1,23 @@
+class BSTIterator {
+    private Stack<TreeNode> s = new Stack<>();
+
+    public BSTIterator(TreeNode root) {
+        pushall(root);
+    }
+    public void pushall(TreeNode root){
+        while(root!=null){
+            s.push(root);
+            root=root.left;
+        }
+    }
+    
+    public int next() {
+        TreeNode tmp = s.pop();
+        pushall(tmp.right);
+        return tmp.val;
+    }
+    
+    public boolean hasNext() {
+        return !s.empty();
+    }
+}
