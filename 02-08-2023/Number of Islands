@@ -11,8 +11,6 @@ class Solution {
     boolean[][] visited;
     int res=0;
     char[][] grid;
-    // int[] drow={-1,-1,0,1,1,1,0,-1};
-    // int[] dcol={0,1,1,1,0,-1,-1,-1};
     int[] drow={-1,0,1,0};
     int[] dcol = {0,1,0,-1};
     int n,m;
@@ -44,14 +42,9 @@ class Solution {
             for(int k=0; k<4; k++){
                 int rw = r+drow[k];
                 int cl = c+dcol[k];
-            // for(int dr=-1; dr<2; dr++){
-            //     for(int dc=-1; dc<2; dc++){
-            //         int rw = r+dr;
-            //         int cl = c+dc;
-                    if(rw>=0 && cl>=0 && rw<n && cl<m && grid[rw][cl]=='1'){
-                        grid[rw][cl]='0';
-                        q.offer(new Pair(rw, cl));
-                    // }
+                if(rw>=0 && cl>=0 && rw<n && cl<m && grid[rw][cl]=='1'){
+                     grid[rw][cl]='0';
+                     q.offer(new Pair(rw, cl));
                 }
             }
         }
