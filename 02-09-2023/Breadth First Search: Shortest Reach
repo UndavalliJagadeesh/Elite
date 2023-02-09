@@ -1,0 +1,33 @@
+
+class Result {
+    public static List<Integer> bfs(int n, int m, List<List<Integer>> edges, int s) {
+        int[] res = new int[n+1];
+        List<List<Integer>> g = new ArrayList<>();
+        for(int i=0; i<=n; i++){
+            g.add(new ArrayList<Integer>());
+            res[i]=-1;
+        }
+        for(List<Integer> ed: edges){
+            g.get(ed.get(0)).add(ed.get(1));
+            g.get(ed.get(1)).add(ed.get(0));
+        }
+        Queue<Integer> q = new LinkedList<>();
+        res[s]=0;
+        q.offer(s);
+        while(!q.isEmpty()){
+            int tmp = q.remove();
+            for(int neigh: g.get(tmp)){
+                if(res[neigh]!=-1) continue;
+                    q.offer(neigh);
+                    res[neigh]= res[tmp]+6;
+            }
+        }
+        List<Integer> ref = new ArrayList<>();
+        for(int k=1; k<=n; k++){
+            if(res[k]!=0){
+                ref.add(res[k]);
+            }
+        }
+        return ref;
+    }
+}
