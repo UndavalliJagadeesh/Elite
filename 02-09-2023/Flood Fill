@@ -1,0 +1,41 @@
+class Pair{
+    int row;
+    int col;
+    Pair(int row, int col){
+        this.row=row;
+        this.col=col;
+    }
+}
+
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        bfs(sr, sc, image, color, image[sr][sc]);
+        return image;
+    }
+
+    public void bfs(int i, int j, int[][] image, int clr, int str){
+        Queue<Pair> q = new LinkedList<>();
+        q.offer(new Pair(i, j));
+        image[i][j]=clr;
+        int[] dcol={-1, 0, 1, 0};
+        int[] drow={0, 1, 0, -1};
+        int n=image.length;
+        int m = image[0].length;
+        int[][] visited=new int[n][m];
+        visited[i][j]=1;
+        while(!q.isEmpty()){
+            Pair tmp = q.remove();
+            int r = tmp.row;
+            int c = tmp.col;
+            for(int k=0; k<4; k++){
+                int rw = r+drow[k];
+                int cl = c+dcol[k];
+                if(rw>=0 && rw<n && cl>=0 && cl<m && image[rw][cl]==str && visited[rw][cl]!=1){
+                    image[rw][cl]=clr;
+                    visited[rw][cl]=1;
+                    q.offer(new Pair(rw, cl));
+                }
+            }
+        }
+    }
+}
