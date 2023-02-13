@@ -1,0 +1,20 @@
+class Solution {
+    List<List<Integer>> rooms = new ArrayList<>();
+    int count=0;
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        boolean visited[] = new boolean[rooms.size()];
+        this.rooms=rooms;
+        dfs(0, visited);
+        for(boolean i: visited){
+            if(!i) return i;
+        }
+        return true;
+    }
+
+    public void dfs(int src, boolean[] visited){
+        visited[src]=true;
+        for(int k: rooms.get(src)){
+            if(!visited[k]) dfs(k, visited);
+        }
+    }
+}
